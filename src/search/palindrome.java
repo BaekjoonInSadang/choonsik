@@ -7,43 +7,67 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * 백준 11005 문제
- * 문제 : 진법 변환 2
- * 10진법 수 N이 주어지고, 이 수를 B진법으로 바꿔 출력하는 프로그램을 생성
- * 10진법을 넘어가는 진법은 숫자로 표시할 수 없는 자리가 있는데, 이런 경우는 알파벳 대문자를 사용한다.
- * A: 10, B: 11, ..., F: 15, ..., Y: 34, Z: 35
- *
- * 첫째줄에는 N과 B가 주어진다.
- * (2 ≤ B ≤ 36)
- * N은 10억보다 작거나 같은 자연수이다.
+ * 백준 문제 : 11068
  */
 public class palindrome {
     public static void main(String[] args) throws IOException {
 
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder result = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
+        int testLength = Integer.parseInt(br.readLine());
         ArrayList<Integer> inputList = new ArrayList<>();
-        ArrayList<Integer> answerList = new ArrayList<>();
-        ArrayList<Integer> originList = new ArrayList<>(Arrays.asList(1, 1, 2, 2, 2, 8));
 
-        System.out.println("수열을 입력하시오.");
-        String input = br.readLine();
-        String[] split = input.split(",");
-        for (String s : split) {
-            inputList.add(Integer.parseInt(s));
+        for (int i=0; i<testLength; i++) {
+
+            int inputNum = Integer.parseInt(br.readLine());
+            int result = 0;
+
+            for (int j=2; j<65; j++) {
+                inputList.clear();
+                int tempNum = inputNum;
+
+                while(true) {
+
+                    int restNum = getRestNum(tempNum, j); // 나머지
+                    int dividedNum = getDividedNum(tempNum, j); // 몫
+
+                    if(dividedNum == 0) {
+                        inputList.add(restNum);
+                        break;
+                    } else {
+                        inputList.add(restNum);
+                    }
+                    tempNum = dividedNum;
+                }
+
+                int listSize = inputList.size();
+                int halfSize = Math.floorDiv(listSize,2);
+
+                for(int k=0; k<halfSize; k++) {
+                    if (inputList.get(k).equals(inputList.get(listSize-k-1))) {
+                        result = 1;
+                    } else {
+                        result = 0;
+                        break;
+                    }
+                }
+                if(result == 1) {
+                    break;
+                }
+
+            }
+            sb.append(result).append("\n");
         }
+        System.out.println(sb);
+    }
 
-        result.append("입력 값 =").append(inputList).append("\n");
-        result.append("필요 값 =").append(originList).append("\n");
+    private static int getRestNum(int inputNum, int j) {
+        return Math.floorMod(inputNum,j);
+    }
 
-        for (int i = 0; i < 6; i++) {
-            int iValue = originList.get(i) - inputList.get(i);
-            answerList.add(i,iValue);
-        }
-
-        result.append("결과 값 =").append(answerList);
-        System.out.println(result);
+    private static int getDividedNum(int inputNum, int j) {
+        return Math.floorDiv(inputNum,j);
     }
 }
+
