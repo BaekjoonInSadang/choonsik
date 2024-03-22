@@ -19,30 +19,30 @@ import java.util.Arrays;
 public class hotel {
     public static void main(String[] args) throws IOException {
 
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder result = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-        ArrayList<Integer> inputList = new ArrayList<>();
-        ArrayList<Integer> answerList = new ArrayList<>();
-        ArrayList<Integer> originList = new ArrayList<>(Arrays.asList(1, 1, 2, 2, 2, 8));
+        int inputLength = Integer.parseInt(br.readLine());
 
-        System.out.println("수열을 입력하시오.");
-        String input = br.readLine();
-        String[] split = input.split(",");
-        for (String s : split) {
-            inputList.add(Integer.parseInt(s));
+        for (int i=0; i<inputLength; i++) {
+
+            String s = br.readLine();
+            String[] input = s.split(" ");
+            int H = Integer.parseInt(input[0]); // 층수
+            int W = Integer.parseInt(input[1]); // 각 층의 방 수
+            int N = Integer.parseInt(input[2]); // 몇 번째 손님
+
+
+            int floor = N % H; // 층수로 나눈 나머지가 층을 결정
+            int room = (N / H) + 1; // 층수로 나눈 몫에 1을 더해 호수 결정
+            if (floor == 0) { // 층수로 나눈 나머지가 0인 경우, 맨 꼭대기 층에 배정됨
+                floor = H;
+                room -= 1; // 호수는 변경되지 않음
+            }
+            sb.append(floor * 100 + room).append("\n"); // 결과 출력
         }
 
-        result.append("입력 값 =").append(inputList).append("\n");
-        result.append("필요 값 =").append(originList).append("\n");
-
-        for (int i = 0; i < 6; i++) {
-            int iValue = originList.get(i) - inputList.get(i);
-            answerList.add(i,iValue);
-        }
-
-        result.append("결과 값 =").append(answerList);
-        System.out.println(result);
+        System.out.println(sb);
     }
+
 }
