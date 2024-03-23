@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 /**
  * 백준 1739 문제
@@ -14,30 +15,20 @@ import java.util.Arrays;
 public class print {
     public static void main(String[] args) throws IOException {
 
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder result = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        int n = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        int tmp = 0;
 
-        ArrayList<Integer> inputList = new ArrayList<>();
-        ArrayList<Integer> answerList = new ArrayList<>();
-        ArrayList<Integer> originList = new ArrayList<>(Arrays.asList(1, 1, 2, 2, 2, 8));
-
-        System.out.println("수열을 입력하시오.");
-        String input = br.readLine();
-        String[] split = input.split(",");
-        for (String s : split) {
-            inputList.add(Integer.parseInt(s));
+        while (n > 0) {
+            tmp = n % b;
+            if(n%b >= 10) sb.append((char) ((n % b) + 55));
+            else sb.append(n%b);
+            n /= b;
         }
 
-        result.append("입력 값 =").append(inputList).append("\n");
-        result.append("필요 값 =").append(originList).append("\n");
-
-        for (int i = 0; i < 6; i++) {
-            int iValue = originList.get(i) - inputList.get(i);
-            answerList.add(i,iValue);
-        }
-
-        result.append("결과 값 =").append(answerList);
-        System.out.println(result);
+        System.out.println(sb.reverse().toString());
     }
 }
