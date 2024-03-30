@@ -32,6 +32,8 @@ public class palindrome {
                     int restNum = getRestNum(tempNum, j); // 나머지
                     int dividedNum = getDividedNum(tempNum, j); // 몫
 
+
+
                     if(dividedNum == 0) {
                         inputList.add(restNum);
                         break;
@@ -61,6 +63,8 @@ public class palindrome {
         }
         System.out.println(sb);
     }
+
+
 
     private static int getRestNum(int inputNum, int j) {
         return Math.floorMod(inputNum,j);

@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
  * 백준 3058 문제
  * 문제 : 사탕 게임
  * 7개의 자연수가 주어질 때, 이들 중 짝수인 자연수들을 모두 골라 그 합을 구하고, 고른 짝수들 중 최솟값을 찾는 프로그램을 작성하시오.
- *
+ * <p>
  * 배열 하나 선언
  * 배열에 들어온 숫자만큼 배열 생성
  * 각 배열마다 연산
@@ -24,7 +24,7 @@ public class candy {
 
         int listCnt = Integer.parseInt(br.readLine());
 
-        for(int j=0; j<listCnt; j++) {
+        for (int j = 0; j < listCnt; j++) {
             int minimum = 0;
             int sum = 0;
             String[] strArr = br.readLine().split(" ");

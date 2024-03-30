@@ -41,8 +41,6 @@ public class hotel {
             }
             sb.append(floor * 100 + room).append("\n"); // 결과 출력
         }
-
         System.out.println(sb);
     }
-
 }
