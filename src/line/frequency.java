@@ -13,8 +13,6 @@ public class frequency {
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-        String[] token = bf.readLine().split(" ");
-
         List<Integer> inputList = Arrays.stream(bf.readLine().split(" "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -32,11 +30,8 @@ public class frequency {
                 })
                 .collect(Collectors.toList());
 
-
-        // 결과 출력
         // 리스트를 문자열로 변환하여 각 요소 사이에 공백을 추가
         String result = String.join(" ", sortedList.stream().map(Object::toString).toArray(String[]::new));
-
 
         System.out.println(result);
     }
