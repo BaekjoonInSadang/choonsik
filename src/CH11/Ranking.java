@@ -1,4 +1,54 @@
 package CH11;
 
+import java.util.HashMap;
+
 public class Ranking {
+
+    public static void main(String[] args) {
+
+        int n = 5;
+        int[][] results = {{4, 3},{4, 2},{3,2},{1,2},{2,5}};
+
+        int answer = 0;
+        int[][] floyd = new int[n+1][n+1];
+
+        for(int i = 0; i < results.length; i++){
+            int A = results[i][0];
+            int B = results[i][1];
+            // A > B
+            floyd[A][B] = 1;
+            floyd[B][A] = -1;
+        }
+
+        for (int i = 1; i < floyd.length; i++) {
+            System.out.println("[" + floyd[i][1]+ ","+ floyd[i][2]+ ","+ floyd[i][3]+ ","+ floyd[i][4]+ "," + floyd[i][5] + "]");
+        }
+
+        // 4 > 3 , 3 > 2 => 4 > 2
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= n; j++){
+                for(int k = 1; k <= n; k++){
+                    if(floyd[i][k] == 1 && floyd[k][j] == 1){
+                        floyd[i][j] = 1;
+                        floyd[j][i] = -1;
+                    }
+                    if(floyd[i][k] == -1 && floyd[k][j] == -1){
+                        floyd[i][j] = -1;
+                        floyd[j][i] = 1;
+                    }
+                }
+            }
+        }
+
+        for(int i = 1; i <= n; i++){
+            int cnt = 0;
+            for(int j = 1; j <= n; j++){
+                if(floyd[i][j] != 0) cnt++;
+            }
+            if(cnt == n-1) answer++;
+        }
+
+        System.out.println("answer = " + answer);
+
+    }
 }
