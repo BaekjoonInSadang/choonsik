@@ -59,7 +59,7 @@ public class Q60057 {
             minLength = Math.min(sb.length(), minLength);
         }
 
-        int i = 0;
+        int i = 1;
         for (String string : List) {
             System.out.println(i + "번째 : " + string + " (" + string.length() + ")");
             i++;
