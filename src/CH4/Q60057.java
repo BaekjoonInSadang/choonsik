@@ -4,40 +4,37 @@ import java.util.ArrayList;
 
 public class Q60057 {
 
-
-    public Integer solution(String message) {
-
-        int MinLength = message.length();
+    public int solution(String s) {
 
         ArrayList<String> List = new ArrayList<>();
-        for (int i = 1; i <= message.length() / 2; i++) {
+        int minLength = s.length();
 
+        for (int i = 1; i <= s.length() / 2; i++) {
 
             StringBuilder sb = new StringBuilder();
 
             int prevCnt = i;
             int nowCnt = i + i;
             int count = 1;
-            String preVal = message.substring(0, i); // a
+            String preVal = s.substring(0, i);
 
             while (true) {
 
-                String nowVal = message.substring(prevCnt, nowCnt);
+                String nowVal;
+                if (nowCnt <= s.length()) {
+                    nowVal = s.substring(prevCnt, nowCnt);
+                } else {
+                    nowVal = "";
+                }
 
-                // 일치
                 if (preVal.equals(nowVal)) {
                     count++;
-
-                    // 불일치
                 } else {
-                    // 불일치 하면 이전거 sb에 추가
                     if (count == 1) {
                         sb.append(preVal);
                     } else {
-                        sb.append(String.valueOf(count) + preVal);
+                        sb.append(String.valueOf(count)).append(preVal);
                     }
-
-                    // 키값 리셋 (새로운 값으로)
                     preVal = nowVal;
                     count = 1;
                 }
@@ -45,29 +42,31 @@ public class Q60057 {
                 prevCnt = nowCnt;
                 nowCnt = prevCnt + i;
 
-                // 8자리인데 3 3 9/ 2
-
-                if (nowCnt > message.length()) {
+                if (prevCnt >= s.length() || nowCnt > s.length()) {
                     if (count == 1) {
                         sb.append(preVal);
                     } else {
-                        sb.append(String.valueOf(count) + preVal);
+                        sb.append(String.valueOf(count)).append(preVal);
                     }
 
-                    sb.append(message.substring(prevCnt, message.length()));
+                    if (prevCnt < s.length()) {
+                        sb.append(s.substring(prevCnt));
+                    }
                     break;
                 }
-
-
             }
-
             List.add(String.valueOf(sb));
-            MinLength = Math.min(sb.length(), MinLength);
-
+            minLength = Math.min(sb.length(), minLength);
         }
 
-        System.out.println("List = " + List);
-
-        return MinLength;
+        int i = 0;
+        for (String string : List) {
+            System.out.println(i + "번째 : " + string + " (" + string.length() + ")");
+            i++;
+        }
+        return minLength;
     }
 }
+
+
+
