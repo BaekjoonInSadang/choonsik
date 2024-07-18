@@ -1,11 +1,34 @@
-package CH3;
+package CH3.Level2;
 
-public class PositionT {
+/**
+ * 거리두기 확인하기
+ */
+public class Q81302 {
 
     private static final int dx[] = {0, -1, 1, 0};
 
     private static final int dy[] = {-1, 0, 0, 1};
 
+    public int[] solution(String[][] places) {
+
+        int[] answer = new int[places.length];
+
+
+        for (int i = 0; i < answer.length; i++) {
+            String[] place = places[i];
+            char[][] room = new char[places.length][];
+            for (int j = 0; j < room.length; j++) {
+                room[j] = place[j].toCharArray();
+            }
+
+            if (isDistanced(room)) {
+                answer[i] = 1;
+            } else {
+                answer[i] = 0;
+            }
+        }
+        return answer;
+    }
 
     private boolean isNextToVolunteer(char[][] room, int x, int y, int exclude) {
         for (int d = 0; d < 4; d++) {
@@ -46,24 +69,5 @@ public class PositionT {
         return true;
     }
 
-    public int[] solution(String[][] places) {
 
-        int[] answer = new int[places.length];
-
-
-        for (int i = 0; i < answer.length; i++) {
-            String[] place = places[i];
-            char[][] room = new char[places.length][];
-            for (int j = 0; j < room.length; j++) {
-                room[j] = place[j].toCharArray();
-            }
-
-            if (isDistanced(room)) {
-                answer[i] = 1;
-            } else {
-                answer[i] = 0;
-            }
-        }
-        return answer;
-    }
 }

@@ -1,6 +1,9 @@
-package CH3;
+package CH3.Level2;
 
-public class Snail668645 {
+/**
+ * 삼각 달팽이
+ */
+public class Q68645 {
 
     private static final int[] dx = {0, 1, -1};
     private static final int[] dy = {1, 0, -1};

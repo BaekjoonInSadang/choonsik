@@ -1,8 +1,11 @@
-package CH3;
+package CH3.Level2;
 
 import java.util.Arrays;
 
-public class Multiplication {
+/**
+ * 행렬의 곱셈
+ */
+public class Q12949 {
 
     private static final int[][] arr1 = {{2, 3, 2}, {4, 2, 4}, {3, 1, 4}};
     private static final int[][] arr2 = {{5, 4, 3}, {2, 4, 1}, {3, 1, 1}};
