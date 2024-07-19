@@ -42,26 +42,24 @@ public class Q72410 {
 
         String solution5 = q72410.solution("123_.def");
         System.out.println("solution5 = " + solution5);
-
-
     }
 
     public String solution(String new_id) {
 
-        StringBuilder result = new StringBuilder(new_id.toLowerCase());
-        result = new StringBuilder(result.toString().replaceAll("[^a-z0-9\\-_.]", ""));
-        result = new StringBuilder(result.toString().replaceAll("\\.+", "."));
+        String result = new_id.toLowerCase();
+        result = result.replaceAll("[^a-z0-9\\-_.]", "");
+        result = result.replaceAll("\\.+", ".");
 
-        if (result.toString().startsWith(".")) result = new StringBuilder(result.substring(1));
-        if (result.toString().endsWith(".")) result = new StringBuilder(result.substring(0, result.length() - 1));
-        if (result.length() == 0) result = new StringBuilder("a");
-        if (result.length() > 15) result = new StringBuilder(result.substring(0, 15));
-        if (result.toString().endsWith(".")) result = new StringBuilder(result.substring(0, result.length() - 1));
+        if (result.startsWith(".")) result = result.substring(1);
+        if (result.endsWith(".")) result = result.substring(0, result.length() - 1);
+        if (result.isEmpty()) result = "a";
+        if (result.length() > 15) result = result.substring(0, 15);
+        if (result.endsWith(".")) result = result.substring(0, result.length() - 1);
 
         while (result.length() < 3) {
-            result.append(result.substring(result.length() - 1));
+            result += result.substring(result.length() - 1);
         }
 
-        return result.toString();
+        return result;
     }
 }
