@@ -26,9 +26,13 @@ import java.util.Map;
 public class Q81301 {
 
     public static void main(String[] args) {
-        Q81301 q81301 = new Q81301();
-        int solution = q81301.solution("one4seveneight");
-        System.out.println("solution = " + solution);
+        Q81301 instance = new Q81301();
+
+        int result1 = instance.solution("one4seveneight");
+        int result2 = instance.solution("three5eightone4seven9");
+
+        System.out.println("result1 = " + result1);
+        System.out.println("result2 = " + result2);
     }
 
     public int solution(String s) {
@@ -47,6 +51,7 @@ public class Q81301 {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             s = s.replace(entry.getKey(), entry.getValue());
         }
+
         return Integer.parseInt(s);
     }
 }

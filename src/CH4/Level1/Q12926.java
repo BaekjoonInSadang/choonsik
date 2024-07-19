@@ -29,9 +29,13 @@ package CH4.Level1;
 public class Q12926 {
 
     public static void main(String[] args) {
-        Q12926 q12926 = new Q12926();
-        String abCd = q12926.solution("ab cd", 2);
-        System.out.println("abCd = " + abCd);
+        Q12926 instance = new Q12926();
+
+        String result1 = instance.solution("ab cd", 2);
+        String result2 = instance.solution("asd SDF As", 5);
+
+        System.out.println("result1 = " + result1);
+        System.out.println("result2 = " + result2);
     }
 
     public String solution(String s, int n) {

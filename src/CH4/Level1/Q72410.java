@@ -27,39 +27,91 @@ package CH4.Level1;
 public class Q72410 {
 
     public static void main(String[] args) {
-        Q72410 q72410 = new Q72410();
-        String solution = q72410.solution("=.=");
-        System.out.println("solution = " + solution);
+        Q72410 instance = new Q72410();
 
-        String solution2 = q72410.solution("z-+.^.");
+        String solution1 = instance.solution("=.=");
+        String solution2 = instance.solution("z-+.^.");
+        String solution3 = instance.solution("abcdefghijklmn.p");
+        String solution4 = instance.solution("...!@BaT#*..y.abcdefghijklm");
+        String solution5 = instance.solution("123_.def");
+
+        System.out.println("solution = " + solution1);
         System.out.println("solution2 = " + solution2);
-
-        String solution3 = q72410.solution("abcdefghijklmn.p");
         System.out.println("solution3 = " + solution3);
-
-        String solution4 = q72410.solution("...!@BaT#*..y.abcdefghijklm");
         System.out.println("solution4 = " + solution4);
-
-        String solution5 = q72410.solution("123_.def");
         System.out.println("solution5 = " + solution5);
     }
 
     public String solution(String new_id) {
 
-        String result = new_id.toLowerCase();
-        result = result.replaceAll("[^a-z0-9\\-_.]", "");
-        result = result.replaceAll("\\.+", ".");
+        return new KAKAOID(new_id)
+                .replaceToLowerCase()
+                .filter()
+                .toSingleDot()
+                .noStartEndDot()
+                .noBlack()
+                .noGreaterThan16()
+                .noLessThan2().getResult();
+    }
 
-        if (result.startsWith(".")) result = result.substring(1);
-        if (result.endsWith(".")) result = result.substring(0, result.length() - 1);
-        if (result.isEmpty()) result = "a";
-        if (result.length() > 15) result = result.substring(0, 15);
-        if (result.endsWith(".")) result = result.substring(0, result.length() - 1);
+    private static class KAKAOID {
 
-        while (result.length() < 3) {
-            result += result.substring(result.length() - 1);
+        private String user_id;
+
+        public KAKAOID(String user_id) {
+            this.user_id = user_id;
         }
 
-        return result;
+        // STEP1
+        private KAKAOID replaceToLowerCase() {
+            user_id = user_id.toLowerCase();
+            return this;
+        }
+
+        // STEP2
+        private KAKAOID filter() {
+            user_id = user_id.replaceAll("[^a-z0-9._-]", "");
+            return this;
+        }
+
+        private KAKAOID toSingleDot() {
+            user_id = user_id.replaceAll("\\.+", ".");
+            return this;
+        }
+
+        private KAKAOID noStartEndDot() {
+            user_id = user_id.replaceAll("^[.]|[.]$", "");
+            return this;
+        }
+
+        private KAKAOID noBlack() {
+            user_id = user_id.isEmpty() ? "a" : user_id;
+            return this;
+        }
+
+        private KAKAOID noGreaterThan16() {
+            if (user_id.length() >= 16) {
+                user_id = user_id.substring(0, 15);
+            }
+            user_id = user_id.replaceAll("[.]$", "");
+            return this;
+        }
+
+        private KAKAOID noLessThan2() {
+            StringBuilder sb = new StringBuilder(user_id);
+            while (sb.length() < 3) {
+                sb.append(sb.charAt(sb.length() - 1));
+            }
+
+            user_id = sb.toString();
+            return this;
+        }
+
+        private String getResult() {
+            return user_id;
+        }
+
     }
+
+
 }

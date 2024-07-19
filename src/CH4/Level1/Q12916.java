@@ -1,6 +1,5 @@
 package CH4.Level1;
 
-
 /**
  * ==========================================================
  * [제목] 문자열 내 p와 y의 개수
@@ -22,6 +21,16 @@ package CH4.Level1;
  * 마지막에 갯수를 비교하여 true or false 둘 다 0이라면 true
  */
 public class Q12916 {
+
+    public static void main(String[] args) {
+        Q12916 instance = new Q12916();
+        boolean result1 = instance.solution("ypPpy");
+        boolean result2 = instance.solution("yppY");
+
+        System.out.println("result1 = " + result1);
+        System.out.println("result2 = " + result2);
+    }
+
     boolean solution(String s) {
 
         int pCnt = 0;

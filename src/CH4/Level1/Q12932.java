@@ -20,22 +20,23 @@ import java.util.Arrays;
 public class Q12932 {
 
     public static void main(String[] args) {
-        Q12932 q12932 = new Q12932();
-        int[] solution = q12932.solution(52232);
-        System.out.println("solution = " + Arrays.toString(solution));
+        Q12932 instance = new Q12932();
+
+        int[] result1 = instance.solution(52232);
+        int[] result2 = instance.solution(910227);
+
+        System.out.println("result = " + Arrays.toString(result1));
+        System.out.println("result = " + Arrays.toString(result2));
     }
 
     public int[] solution(long n) {
 
-        String reverseValue = new StringBuilder(String.valueOf(n)).reverse().toString();
-        int[] result = new int[reverseValue.length()];
-
-        String[] split = reverseValue.split("");
-
+        String reverseVal = new StringBuilder(String.valueOf(n)).reverse().toString();
+        int[] result = new int[reverseVal.length()];
+        String[] split = reverseVal.split("");
         for (int i = 0; i < split.length; i++) {
             result[i] = Integer.parseInt(split[i]);
         }
-
         return result;
     }
 }
