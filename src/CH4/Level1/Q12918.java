@@ -16,17 +16,15 @@ package CH4.Level1;
 public class Q12918 {
 
     public static void main(String[] args) {
-        Q12918 q12918 = new Q12918();
-        boolean solution = q12918.solution("13abc5");
+        Q12918 instance = new Q12918();
+        boolean result = instance.solution("13abc5");
+        boolean result2 = instance.solution("12ab34");
 
-        System.out.println("solution = " + solution);
-
-        boolean solution1 = q12918.solution("12ab34");
-        System.out.println("solution1 = " + solution1);
+        System.out.println("result = " + result);
+        System.out.println("result2 = " + result2);
     }
 
     public boolean solution(String s) {
-
         return s.matches("\\d{4}|\\d{6}");
     }
 
