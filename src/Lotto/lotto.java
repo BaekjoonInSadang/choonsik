@@ -1,7 +1,10 @@
 package Lotto;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 로또 번호 만들기
@@ -15,11 +18,11 @@ public class lotto {
         /**
          * 한번에 로또 5개 받기
          */
-//        List<List<Integer>> integers = lottoCalcV1();
-//        System.out.println(" ===== [1등 당첨 번호 리스트] ===== ");
-//        for (List<Integer> integer : integers) {
-//            System.out.println(" 당첨 번호 " + integer);
-//        }
+        List<List<Integer>> integers = lottoCalcV1();
+        System.out.println(" ===== [1등 당첨 번호 리스트] ===== ");
+        for (List<Integer> integer : integers) {
+            System.out.println(" 당첨 번호 " + integer);
+        }
 
         /**
          * 하나씩 받기
@@ -35,11 +38,11 @@ public class lotto {
         /**
          * 연금 복권
          */
-        SixNumGenerator sixNum = new SixNumGenerator();
-        Random random = new Random();
-        int[] generate = sixNum.generate();
-        int number = random.nextInt(5) + 1;
-        System.out.println(" 럭키 연금 복권 번호 " + "[" + number + "조]" + Arrays.toString(generate));
+//        SixNumGenerator sixNum = new SixNumGenerator();
+//        Random random = new Random();
+//        int[] generate = sixNum.generate();
+//        int number = random.nextInt(5) + 1;
+//        System.out.println(" 럭키 연금 복권 번호 " + "[" + number + "조]" + Arrays.toString(generate));
     }
 
     /**
