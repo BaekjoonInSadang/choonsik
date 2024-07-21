@@ -30,6 +30,8 @@ public class Q68935 {
 
     public int solution(int n) {
         String ternary = toTernary(n);
+
+        System.out.println("ternary = " + ternary);
         return Integer.parseInt(ternary, 3);
     }
 
@@ -43,7 +45,22 @@ public class Q68935 {
             ternary.insert(0, remainder);
             number /= 3;
         }
-        
+
+        // 뒤집음
         return ternary.reverse().toString();
+    }
+
+    public static String toForthnary(int number) {
+
+        if (number == 0) return "0";
+
+        StringBuilder sb = new StringBuilder();
+        while (number > 0) {
+            int reminder = number % 3;
+            sb.insert(0, reminder);
+            number /= 3;
+        }
+        // 뒤집음
+        return sb.reverse().toString();
     }
 }
