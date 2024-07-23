@@ -36,6 +36,17 @@ import java.util.ArrayList;
  */
 public class Q60057 {
 
+    public static void main(String[] args) {
+        Q60057 instance = new Q60057();
+
+        int result1 = instance.solution("xababcdcdababcdcd");
+        int result2 = instance.solution("aabbccdd");
+
+        System.out.println("============== 문제 60057  ==============");
+        System.out.println("result1 = " + result1);
+        System.out.println("result2 = " + result2);
+    }
+
     public int solution(String s) {
 
         ArrayList<String> List = new ArrayList<>();

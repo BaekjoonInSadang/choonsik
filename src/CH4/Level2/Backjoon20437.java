@@ -1,6 +1,10 @@
 package CH4.Level2;
 
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ==========================================================
@@ -23,95 +27,79 @@ import java.util.*;
  */
 public class Backjoon20437 {
 
-    public static void main(String[] args) {
-        Backjoon20437 instance = new Backjoon20437();
-        int[] solution = instance.solution("aabadcafsassaaaafsfsa", 5);
+    public static void main(String[] args) throws IOException {
 
-        System.out.println("solution = " + Arrays.toString(solution));
+        // 하드코딩된 입력 값을 설정
+        String input = "2\n" +  // 테스트 케이스 수
+                "superaquatornado\n" +  // 첫 번째 테스트 케이스 문자열
+                "2\n" +  // 첫 번째 테스트 케이스 k 값
+                "abcdefghijklmnopqrstuvwxyz\n" +  // 두 번째 테스트 케이스 문자열
+                "5\n";   // 두 번째 테스트 케이스 k 값
+
+        // 하드코딩된 입력을 InputStream으로 변환
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+
+        // InputStream을 BufferedReader로 감싸서 입력을 읽기
+        BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+
+
+//        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        // 테스트 케이스 수 읽기
+        int t = Integer.parseInt(bf.readLine());
+
+        // 각 테스트 케이스에 대해 반복
+        for (int i = 0; i < t; i++) {
+            String solution = solution(bf.readLine(), Integer.parseInt(bf.readLine()));
+            System.out.println(solution);
+        }
     }
 
-    public int[] solution(String s, int k) {
+    // 문자열과 정수 k를 받아 가장 짧고 긴 문자열의 길이를 계산하는 메서드
+    public static String solution(String s, int k) {
 
-        int[] answer = {0, 0};
+        // k개 이상의 빈도를 가진 문자들을 리스트로 가져옴
+        List<Character> characters = calcCharacters(s, k);
+        int maxLength = Integer.MIN_VALUE; // 최댓값 초기화
+        int minLength = Integer.MAX_VALUE; // 최솟값 초기화
 
+        for (char ch : characters) {
+            List<Integer> positions = new ArrayList<>();
 
-        List<String> strings = calcString(s, k);
-        System.out.println("strings = " + strings);
-        int maxLength = 0;
-
-        for (String key : strings) {
-            System.out.println(" ================== 현재 key 값 = ['" + key + "'] ==================");
-//            int minLength3 = s.length();
-//            int maxLength4 = 0;
-//
-//            // 여기에서 조건 만족하는지 체크 (3번)
-//            while (startPoint < s.length() - 2) {
-//                String substring = s.substring(startPoint, endPoint);
-//                boolean pass = checkCondition3(substring, key);
-//                if (pass) {
-//                    startPoint += 1;
-//                    endPoint = startPoint + 2;
-//                    minLength3 = Math.min(minLength3, substring.length());
-//                } else {
-//                    endPoint += 1;
-//                }
-//            }
-//            answer[0] = minLength3;
-
-
-            // 여기에서 조건 만족하는지 체크 (4번)
-            char[] charArray = s.toCharArray();
-            ArrayList<Integer> tempRe = new ArrayList<>();
-
-            for (int i = 0; i < charArray.length; i++) {
-                if (String.valueOf(charArray[i]).equals(key)) {
-                    tempRe.add(i);
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == ch) {
+                    positions.add(i);
                 }
             }
-            System.out.println("[key 값으로 사용되는 리스트] = " + tempRe);
 
-
-            for (int i = 0; i < tempRe.size() - k + 1; i++) {
+            for (int i = 0; i <= positions.size() - k; i++) {
                 int lastIndex = i + k - 1;
-                System.out.println("index[" + i + "] = " + tempRe.get(i));
-                System.out.println("index[" + lastIndex + "] = " + tempRe.get(lastIndex));
-                System.out.println(tempRe.get(lastIndex) - tempRe.get(i));
-                maxLength = Math.max(maxLength, tempRe.get(lastIndex) - tempRe.get(i));
-                if (lastIndex - 1 > tempRe.size()) break;
+                int length = positions.get(i + k - 1) - positions.get(i) + 1;
+                maxLength = Math.max(maxLength, length);
+                minLength = Math.min(minLength, length);
             }
-
-            System.out.println("maxLength = " + maxLength);
         }
-        answer[1] = Math.max(answer[1], maxLength);
 
-        return answer;
+        // 유효한 값이 없는 경우
+        if (minLength == Integer.MAX_VALUE || maxLength == Integer.MIN_VALUE) {
+            return "-1";
+        }
+        // 결과 문자열 반환
+        return minLength + " " + maxLength;
     }
 
-    private List<String> calcString(String s, int k) {
+    private static List<Character> calcCharacters(String s, int k) {
         Map<Character, Integer> charCountMap = new HashMap<>();
-        ArrayList<String> result = new ArrayList<>();
+        List<Character> result = new ArrayList<>();
 
-        // 각 문자 빈도 계산
         for (char c : s.toCharArray()) {
-            if (charCountMap.containsKey(c)) {
-                charCountMap.put(c, charCountMap.get(c) + 1);
-            } else {
-                charCountMap.put(c, 1);
-            }
+            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
         }
 
-        // 빈도가 2 이상인 문자 출력
         for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
             if (entry.getValue() >= k) {
-                result.add(entry.getKey().toString());
+                result.add(entry.getKey());
             }
         }
-
         return result;
-    }
-
-    private boolean checkCondition3(String input, String key) {
-
-        return true;
     }
 }

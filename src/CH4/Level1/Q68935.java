@@ -19,18 +19,19 @@ package CH4.Level1;
 public class Q68935 {
 
     public static void main(String[] args) {
-        Q68935 q68935 = new Q68935();
-        int result = q68935.solution(125);
+        Q68935 instance = new Q68935();
 
-        System.out.println("result = " + result);
+        int result1 = instance.solution(125);
+        int result2 = instance.solution(53423);
+
+        System.out.println("result1 = " + result1);
+        System.out.println("result2 = " + result2);
     }
 
     public int solution(int n) {
-
-        // 3진법으로 변환
         String ternary = toTernary(n);
 
-        // 10진법으로 변환
+        System.out.println("ternary = " + ternary);
         return Integer.parseInt(ternary, 3);
     }
 
@@ -44,7 +45,22 @@ public class Q68935 {
             ternary.insert(0, remainder);
             number /= 3;
         }
-        // 뒤집어!
+
+        // 뒤집음
         return ternary.reverse().toString();
+    }
+
+    public static String toForthnary(int number) {
+
+        if (number == 0) return "0";
+
+        StringBuilder sb = new StringBuilder();
+        while (number > 0) {
+            int reminder = number % 3;
+            sb.insert(0, reminder);
+            number /= 3;
+        }
+        // 뒤집음
+        return sb.reverse().toString();
     }
 }

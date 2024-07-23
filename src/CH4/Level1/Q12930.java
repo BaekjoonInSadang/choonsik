@@ -22,9 +22,13 @@ package CH4.Level1;
 public class Q12930 {
 
     public static void main(String[] args) {
-        Q12930 q12930 = new Q12930();
-        String result = q12930.solution("try hello world");
-        System.out.println("result = " + result);
+        Q12930 instance = new Q12930();
+
+        String result1 = instance.solution("try hello world");
+        String result2 = instance.solution("Gram java CodingTest");
+
+        System.out.println("result1 = " + result1);
+        System.out.println("result2 = " + result2);
     }
 
     public String solution(String s) {
@@ -34,7 +38,7 @@ public class Q12930 {
 
         for (char c : s.toCharArray()) {
             if (c == ' ') {
-                sb.append(c); // 공백 그대로 추가
+                sb.append(c);
                 toUpper = true;
             } else {
                 if (toUpper) {
@@ -48,31 +52,4 @@ public class Q12930 {
         }
         return sb.toString();
     }
-
-//    public String solution(String s) {
-//
-//        StringBuilder sb = new StringBuilder();
-//
-//        String[] split = s.split(" ");
-//
-//        for (String string : split) {
-//            char[] charArray = string.toCharArray();
-//
-//            StringBuilder tempSb = new StringBuilder();
-//            for (int j = 0; j < charArray.length; j++) {
-//
-//                if (j % 2 == 0) {
-//                    tempSb.append(String.valueOf(charArray[j]).toUpperCase());
-//                } else {
-//                    tempSb.append(String.valueOf(charArray[j]).toLowerCase());
-//                }
-//            }
-//            sb.append(tempSb.toString());
-//            sb.append(" ");
-//        }
-//
-//        sb.setLength(sb.length() - 1);
-//
-//        return sb.toString();
-//    }
 }
